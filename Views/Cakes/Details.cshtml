@@ -1,0 +1,41 @@
+@model SweetDelights.Models.Cake
+
+@{
+    ViewData["Title"] = "Cake Details";
+}
+
+<div class="row mt-5">
+    <div class="col-md-6">
+        <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid rounded shadow-sm w-100" style="max-height: 500px; object-fit: cover;">
+    </div>
+    <div class="col-md-6 d-flex flex-column justify-content-center pt-4 pt-md-0">
+        <h1 class="text-pink fw-bold">@Model.Name</h1>
+        <h4 class="text-brown mb-4">@Model.Price.ToString("C")</h4>
+        
+        <p class="lead">@Model.Description</p>
+        
+        <div class="mt-4">
+            <h5 class="fw-bold">Details:</h5>
+            <ul class="list-unstyled">
+                <li><strong>Category:</strong> @Model.Category</li>
+                <li><strong>Weight:</strong> @Model.Weight</li>
+                <li>
+                    <strong>Status:</strong> 
+                    @if (Model.IsAvailable)
+                    {
+                        <span class="badge bg-success">Available</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Out of Stock</span>
+                    }
+                </li>
+            </ul>
+        </div>
+        
+        <div class="mt-4">
+            <button class="btn btn-pink btn-lg rounded-pill px-5">Add to Cart</button>
+            <a asp-action="Index" class="btn btn-outline-secondary ms-2 rounded-pill px-4">Back to Menu</a>
+        </div>
+    </div>
+</div>

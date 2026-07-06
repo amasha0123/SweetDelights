@@ -1,0 +1,52 @@
+@model SweetDelights.Models.Contact
+
+@{
+    ViewData["Title"] = "Contact Us";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+        <div class="card shadow-sm border-0 rounded-3 p-4">
+            <h2 class="text-center text-pink fw-bold mb-4">Contact Us</h2>
+            
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    @TempData["SuccessMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            <form asp-action="Index">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label fw-bold"></label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter your full name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label fw-bold"></label>
+                    <input asp-for="Email" class="form-control" type="email" placeholder="Enter your email address" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Phone" class="form-label fw-bold"></label>
+                    <input asp-for="Phone" class="form-control" placeholder="Enter your phone number" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+                <div class="mb-4">
+                    <label asp-for="Message" class="form-label fw-bold"></label>
+                    <textarea asp-for="Message" class="form-control" rows="4" placeholder="How can we help you?"></textarea>
+                    <span asp-validation-for="Message" class="text-danger"></span>
+                </div>
+                <div class="d-grid">
+                    <input type="submit" value="Send Message" class="btn btn-pink btn-lg rounded-pill" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

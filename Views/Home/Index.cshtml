@@ -1,0 +1,84 @@
+@model IEnumerable<SweetDelights.Models.Cake>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="hero-section shadow-lg mb-5">
+    <!-- Spline 3D Scene Background (A beautiful dessert/abstract scene) -->
+    <div class="spline-container">
+        <!-- Using a public Spline scene featuring a 3D donut/dessert aesthetic -->
+        <spline-viewer url="https://prod.spline.design/qE1d6-8mXN-14U5K/scene.splinecode"></spline-viewer>
+    </div>
+    
+    <div class="hero-content text-center floating-element">
+        <h1 class="display-2 fw-black text-pink mb-3" style="font-weight: 900; text-shadow: 2px 2px 4px rgba(255,255,255,0.8);">
+            Sweet Delights
+        </h1>
+        <p class="lead text-brown fw-bold fs-4 mb-4">
+            Experience the art of baking in a whole new dimension.
+        </p>
+        <a asp-controller="Cakes" asp-action="Index" class="btn btn-pink btn-lg rounded-pill px-5 py-3 shadow-lg fs-5">
+            Explore 3D Menu
+        </a>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="text-center mb-5 gsap-fade-up">
+        <h2 class="display-5 text-brown fw-bold">Our Masterpieces</h2>
+        <p class="text-muted fs-5">Hover over our cakes to feel the magic</p>
+    </div>
+
+    <div class="row">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <div class="col-md-4 mb-5 gsap-fade-up">
+                    <div class="card cake-card h-100">
+                        <div class="overflow-hidden">
+                            <img src="@item.ImageUrl" class="card-img-top w-100" alt="@item.Name">
+                        </div>
+                        <div class="card-body text-center p-4">
+                            <h4 class="card-title text-pink fw-bold mb-1">@item.Name</h4>
+                            <span class="badge bg-light text-brown border mb-3 rounded-pill px-3 py-2">@item.Category</span>
+                            <h5 class="text-brown fw-bold mb-3">@item.Price.ToString("C")</h5>
+                            <a asp-controller="Cakes" asp-action="Details" asp-route-id="@item.CakeId" class="btn btn-pink rounded-pill w-100 py-2">Discover Magic</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center gsap-fade-up">
+                <div class="p-5" style="background: var(--sd-glass); border-radius: 20px;">
+                    <h3 class="text-pink">Our kitchen is preparing the first batch!</h3>
+                    <p>Go to the Admin portal to add some magnificent 3D cakes.</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="mt-5 p-5 rounded-4 mb-5 gsap-fade-up" style="background: rgba(255,255,255,0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.9); box-shadow: 0 20px 40px rgba(0,0,0,0.05);">
+    <h2 class="text-center text-pink fw-bold mb-5">A Taste of Perfection</h2>
+    <div class="row mt-4">
+        <div class="col-md-4 text-center floating-element" style="animation-delay: 0s;">
+            <div class="display-4 mb-3">✨</div>
+            <h4 class="fw-bold text-brown">Premium Ingredients</h4>
+            <p class="text-muted">Only the finest Belgian chocolate and Madagascan vanilla.</p>
+        </div>
+        <div class="col-md-4 text-center floating-element" style="animation-delay: 2s;">
+            <div class="display-4 mb-3">🎨</div>
+            <h4 class="fw-bold text-brown">Artisan Crafted</h4>
+            <p class="text-muted">Every cake is a unique masterpiece sculpted by hand.</p>
+        </div>
+        <div class="col-md-4 text-center floating-element" style="animation-delay: 4s;">
+            <div class="display-4 mb-3">🚀</div>
+            <h4 class="fw-bold text-brown">Next-Level Taste</h4>
+            <p class="text-muted">Flavors that will teleport your tastebuds to another dimension.</p>
+        </div>
+    </div>
+</div>
